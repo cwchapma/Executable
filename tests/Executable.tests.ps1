@@ -30,6 +30,7 @@ Describe 'Invoke-Executable' {
 
     It 'Return stderr as ErrorRecord when -StdErrAsErrorRecords' {
         $output = Invoke-Executable $cmd -StdErrAsErrorRecords
+        $output[0] | Should -BeOfType String
         $output[1] | Should -BeOfType System.Management.Automation.ErrorRecord
         $output[1].TargetObject | Should -Be 'Hello from stderr!'
         $output[1].FullyQualifiedErrorId | Should -Be "NativeCommandError"
