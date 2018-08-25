@@ -12,7 +12,7 @@
 
 	PrivateData = @{
         PSData = @{
-            Tags = "executable,exe,commandline"
+            Tags = "executable exe commandline"
             LicenseUri = "https://github.com/cwchapma/Executable/blob/master/Executable/license"
             ProjectUri = "https://github.com/cwchapma/Executable"
             ReleaseNotes = "Intial Release"
