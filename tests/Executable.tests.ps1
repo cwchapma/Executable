@@ -10,6 +10,7 @@ else
 }
 
 $ModulePath = Join-Path $ProjectPath $ModuleName
+Import-Module $ModulePath -Force
 
 dotnet build --configuration Release --runtime win-x64 $PSScriptRoot\TestConsoleApp
 
