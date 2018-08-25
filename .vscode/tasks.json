@@ -33,6 +33,16 @@
             "showOutput": "always",
             "suppressTaskName": true,
             "problemMatcher": "$pester"
+        },
+        {
+            "taskName": "Test",
+            "suppressTaskName": true,
+            "isTestCommand": true,
+            "args": [
+                "Write-Host 'Invoking Pester...'; Invoke-Pester -Script test -PesterOption @{IncludeVSCodeMarker=$true};",
+                "Invoke-Command { Write-Host 'Completed Test task in task runner.' }"
+            ],
+            "problemMatcher": "$pester"
         }
     ]
 }
