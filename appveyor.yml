@@ -7,7 +7,7 @@ os: Visual Studio 2017
 
 install:
   - ps: Install-PackageProvider -Name NuGet -Confirm:$false -Force -ErrorAction Stop | Out-Null
-  - ps: Install-Module -Name Pester, PSScriptAnalyzer, PlatyPS -Confirm:$false -Force -ErrorAction Continue | Out-Null
+  - ps: Install-Module -Name Pester, PSScriptAnalyzer, PlatyPS -Confirm:$false -Force -ErrorAction Continue -SkipPublisherCheck | Out-Null
 
 build: false
 
