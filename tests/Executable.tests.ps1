@@ -94,4 +94,17 @@ Describe 'Invoke-Executable' {
         $output | Should -Contain "Arg: run1"
         $output | Should -Contain "Arg: run2"
     }
+
+    It 'supports -ErrorVariable' {
+        $output = Invoke-Executable $cmd -ErrorVariable "MyErrors"
+        $output | Should -Contain "Hello from stderr!"
+        $MyErrors[0].TargetObject | Should -Contain "Hello from stderr!"
+    }
+
+    It 'supports -ErrorVariable with -StdErrAsErrorRecords' {
+        $output = Invoke-Executable $cmd -ErrorVariable "MyErrors" -StdErrAsErrorRecords
+        $output[1] | Should -BeOfType System.Management.Automation.ErrorRecord
+        $output[1].TargetObject | Should -Be "Hello from stderr!"
+        $MyErrors[0].TargetObject | Should -Contain "Hello from stderr!"
+    }
 }
