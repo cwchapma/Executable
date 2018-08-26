@@ -112,4 +112,8 @@ Describe 'Invoke-Executable' {
         $output = exec $cmd
         $output | Should -Contain 'Hello from stdout!'
     }
+
+    It 'does NOT throw when $ErrorAction is ''Stop''' {        
+        Invoke-Executable $cmd -ErrorAction 'Stop'
+    }
 }

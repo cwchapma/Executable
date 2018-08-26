@@ -33,8 +33,15 @@ function Invoke-Executable {
         if ($PSCmdlet.ShouldProcess("$Command", "Invoke-Executable")) {
             Write-Verbose "Executing '$Command'"
 
+            # If ErrorActionPreference is 'Stop', Invoke-Expression will throw if command outputs to stdout
+            $oldErrorAction = $ErrorActionPreference
+            $ErrorActionPreference = 'Continue'
+
             # 2>&1 captures stderr in the output but they are still error records
             $output = Invoke-Expression "$Command 2>&1"
+
+            # Restore original $ErrorActionPreference
+            $ErrorActionPreference = $oldErrorAction
 
             if ($StdErrAsErrorRecords) {
                 $output
