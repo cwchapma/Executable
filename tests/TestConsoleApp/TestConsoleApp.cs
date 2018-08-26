@@ -9,9 +9,13 @@ namespace test
         {
             // Output to stdout because "everybody's doing it"
             Console.WriteLine("Hello from stdout!");
+            // Flush to make sure stderr and stdout are syncronized (output in the order in the code)
+            Console.Out.Flush();
 
             // Output to stderr so we can check this doesn't cause a powershell error
             Console.Error.WriteLine("Hello from stderr!");
+            // Flush to make sure stderr and stdout are syncronized (output in the order in the code)
+            Console.Out.Flush();
 
             // Output args so we can test they are passed properly
             foreach (var arg in args) {
@@ -25,6 +29,8 @@ namespace test
                     }
                 }
                 Console.WriteLine($"Arg: {arg}");
+                // Flush to make sure stderr and stdout are syncronized (output in the order in the code)
+                Console.Out.Flush();
             }
         }
     }
