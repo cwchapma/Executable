@@ -10,9 +10,6 @@ $gitversion = GitVersion.exe | ConvertFrom-Json
 
 $Version = $gitversion.MajorMinorPatch
 
-$TestExit = [boolean]($env:APPVEYOR)
-"TestExit: $TestExit"
-
 $ModulePath = Join-Path $ProjectPath $ModuleName
 
 $params = @{
@@ -39,4 +36,13 @@ $null = New-Item -ItemType Directory -Path $DocsOutPutPath -Force
 $null = New-ExternalHelp -Path $DocsPath -OutPutPath $DocsOutPutPath -Encoding ([System.Text.Encoding]::UTF8) -Force
 
 # run tests
-Invoke-Pester -EnableExit:$TestExit -PesterOption @{IncludeVSCodeMarker = $true}
+$testResultsFile = ".\TestsResults.xml"
+Invoke-Pester `
+    -PesterOption @{IncludeVSCodeMarker = $true} `
+    -OutputFormat NUnitXml `
+    -OutputFile $testResultsFile
+
+(New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $testResultsFile))
+if ($res.FailedCount -gt 0) { 
+    throw "$($res.FailedCount) tests failed."
+}
