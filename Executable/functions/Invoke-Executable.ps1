@@ -21,27 +21,31 @@
     Output (if any)
 #>
 function Invoke-Executable {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
-        [Parameter(Mandatory, Position=0, ValueFromPipeline)]
+        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
         [String[]] $Command,
-        [int[]] $AllowableExitCodes = @(0),
+        [int[]] $AllowableExitCodes = 0,
         [Switch] $StdErrAsErrorRecords = $false
     )
 
     Process {
-        Write-Debug "Executing '$Command'"
+        if ($PSCmdlet.ShouldProcess("$Command", "Invoke-Executable")) {
+            Write-Verbose "Executing '$Command'"
 
-        # 2>&1 captures stderr in the output but they are still error records
-        $output = Invoke-Expression "$Command 2>&1"
+            # 2>&1 captures stderr in the output but they are still error records
+            $output = Invoke-Expression "$Command 2>&1"
 
-        if ($StdErrAsErrorRecords) {
-            $output
-        } else {
-            $output | ForEach-Object { Write-Output $_.ToString() }
-        }
-        if ($AllowableExitCodes -notcontains $LASTEXITCODE) {
-            throw "Exit code '$LASTEXITCODE' not in allowable exit codes '$AllowableExitCodes'. Command: '$Command'"
+            if ($StdErrAsErrorRecords) {
+                $output
+            }
+            else {
+                # Convert ErrorRecords to strings
+                $output | ForEach-Object { Write-Output $_.ToString() }
+            }
+            if ($AllowableExitCodes -notcontains $LASTEXITCODE) {
+                throw "Exit code '$LASTEXITCODE' not in allowable exit codes '$AllowableExitCodes'. Command: '$Command'"
+            }
         }
     }
 }

@@ -13,8 +13,8 @@ Executes a executable file (*.exe) and handles stderr and exit codes
 ## SYNTAX
 
 ```
-Invoke-Executable [-Command] <String[]> [-AllowableExitCodes <Int32[]>] [-StdErrAsErrorRecords]
- [<CommonParameters>]
+Invoke-Executable [-Command] <String[]> [-AllowableExitCodes <Int32[]>] [-StdErrAsErrorRecords] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,6 +78,36 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
