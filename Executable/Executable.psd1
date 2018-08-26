@@ -1,6 +1,6 @@
 ﻿@{
 	NestedModules = "Executable.psm1"
-	ModuleVersion = "0.1.0"
+	ModuleVersion = "0.2.0"
 	GUID = "c4e893ac-fb28-4881-bb77-6df31b69c041"
 	Author = "Clint Chapman"
 	Copyright = "(c) 2018. All rights reserved."
@@ -15,7 +15,7 @@
             Tags = @('executable','exe','commandline')
             LicenseUri = "https://github.com/cwchapma/Executable/blob/master/Executable/license"
             ProjectUri = "https://github.com/cwchapma/Executable"
-            ReleaseNotes = "Intial Release"
+            ReleaseNotes = "Add support for specifying allowable exit codes"
         }
     }
 }
