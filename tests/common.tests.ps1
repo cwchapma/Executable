@@ -8,7 +8,7 @@ if ($env:APPVEYOR)
 else
 {
     $ModuleName = Split-Path $ProjectPath -Leaf
-    $Version = "0.1.0"
+    $Version = "0.2.0"
 }
 
 $ModulePath = Join-Path $ProjectPath $ModuleName
