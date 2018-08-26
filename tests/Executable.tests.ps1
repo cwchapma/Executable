@@ -50,11 +50,10 @@ Describe 'Invoke-Executable' {
         $output | Should -Contain 'Arg: arg2'
     }
 
-    # Apparently the order is not reliable and this fails intermittently
-    # It 'outputs in the right order' {
-    #     $output = Invoke-Executable "$cmd arg1 arg2"
-    #     $output | Should -Be "Hello from stdout!", "Hello from stderr!", "Arg: arg1", "Arg: arg2"
-    # }
+    It 'outputs in the right order' {
+        $output = Invoke-Executable "$cmd arg1 arg2"
+        $output | Should -Be "Hello from stdout!", "Hello from stderr!", "Arg: arg1", "Arg: arg2"
+    }
 
     It 'handles paths as args' {
         $output = Invoke-Executable "$cmd 'c:\this is a\test'"
