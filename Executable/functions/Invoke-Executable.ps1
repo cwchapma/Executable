@@ -24,22 +24,24 @@ function Invoke-Executable {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, Position=0, ValueFromPipeline)]
-        [String] $Command,
+        [String[]] $Command,
         [int[]] $AllowableExitCodes = @(0),
         [Switch] $StdErrAsErrorRecords = $false
     )
 
-    Write-Debug "Executing '$Command'"
+    Process {
+        Write-Debug "Executing '$Command'"
 
-    # 2>&1 captures stderr in the output but they are still error records
-    $output = Invoke-Expression "$Command 2>&1"
+        # 2>&1 captures stderr in the output but they are still error records
+        $output = Invoke-Expression "$Command 2>&1"
 
-    if ($StdErrAsErrorRecords) {
-        $output
-    } else {
-        $output | ForEach-Object { Write-Output $_.ToString() }
-    }
-    if ($AllowableExitCodes -notcontains $LASTEXITCODE) {
-        throw "Exit code '$LASTEXITCODE' not in allowable exit codes '$AllowableExitCodes'. Command: '$Command'"
+        if ($StdErrAsErrorRecords) {
+            $output
+        } else {
+            $output | ForEach-Object { Write-Output $_.ToString() }
+        }
+        if ($AllowableExitCodes -notcontains $LASTEXITCODE) {
+            throw "Exit code '$LASTEXITCODE' not in allowable exit codes '$AllowableExitCodes'. Command: '$Command'"
+        }
     }
 }

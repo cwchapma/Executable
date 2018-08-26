@@ -13,7 +13,7 @@ Executes a executable file (*.exe) and handles stderr and exit codes
 ## SYNTAX
 
 ```
-Invoke-Executable [-Command] <String> [-AllowableExitCodes <Int32[]>] [-StdErrAsErrorRecords]
+Invoke-Executable [-Command] <String[]> [-AllowableExitCodes <Int32[]>] [-StdErrAsErrorRecords]
  [<CommonParameters>]
 ```
 
@@ -39,7 +39,7 @@ and will not throw an exception if the exit code is one of 0,1,2,3, or 7
 The executable and arguments
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 

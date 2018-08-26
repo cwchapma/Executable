@@ -88,4 +88,10 @@ Describe 'Invoke-Executable' {
     It 'accepts command from input' {
         "$cmd" | Invoke-Executable
     }
+
+    It 'accepts multiple commands from input' {
+        $output = "$cmd run1", "$cmd run2" | Invoke-Executable
+        $output | Should -Contain "Arg: run1"
+        $output | Should -Contain "Arg: run2"
+    }
 }
