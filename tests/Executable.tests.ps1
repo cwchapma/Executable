@@ -17,18 +17,18 @@ dotnet build --configuration Release --runtime win-x64 $PSScriptRoot\TestConsole
 Describe 'Invoke-Executable' {
     $cmd = "$PSScriptRoot\TestConsoleApp\bin\Release\netcoreapp2.0\win-x64\TestConsoleApp.exe"
 
-    It "Returns stdout" {
+    It "returns stdout" {
         $output = Invoke-Executable $cmd
         $output | Should -Contain 'Hello from stdout!'
     }
 
-    It 'Returns stderr as string' {
+    It 'returns stderr as string' {
         $output = Invoke-Executable $cmd
         $output | Should -BeOfType String
         $output | Should -Contain 'Hello from stderr!'
     }
 
-    It 'Return stderr as ErrorRecord when -StdErrAsErrorRecords' {
+    It 'return stderr as ErrorRecord when -StdErrAsErrorRecords' {
         $output = Invoke-Executable $cmd -StdErrAsErrorRecords
         $output[0] | Should -BeOfType String
         $output[1] | Should -BeOfType System.Management.Automation.ErrorRecord
@@ -36,15 +36,24 @@ Describe 'Invoke-Executable' {
         $output[1].FullyQualifiedErrorId | Should -Be "NativeCommandError"
     }
 
-    It 'Passes args properly' {
+    It 'passes args properly' {
         $output = Invoke-Executable "$cmd arg1 arg2"
         $output | Should -Contain 'Arg: arg1'
         $output | Should -Contain 'Arg: arg2'
     }
 
-    It 'Outputs in the right order' {
+    It 'outputs in the right order' {
         $output = Invoke-Executable "$cmd arg1 arg2"
         $output | Should -Be "Hello from stdout!", "Hello from stderr!", "Arg: arg1", "Arg: arg2"
     }
 
+    It 'handles paths as args' {
+        $output = Invoke-Executable "$cmd 'c:\this is a\test'"
+        $output[2] | Should -Be "Arg: c:\this is a\test"
+    }
+
+    It 'handles \n in a path arg' {
+        $output = Invoke-Executable "$cmd 'c:\this is a\nother test'"
+        $output[2] | Should -Be "Arg: c:\this is a\nother test"
+    }
 }
