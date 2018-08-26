@@ -13,7 +13,7 @@ Executes a executable file (*.exe) and handles stderr and exit codes
 ## SYNTAX
 
 ```
-Invoke-Executable [[-Command] <String>] [[-AllowableExitCodes] <Int32[]>] [-StdErrAsErrorRecords]
+Invoke-Executable [-Command] <String> [-AllowableExitCodes <Int32[]>] [-StdErrAsErrorRecords]
  [<CommonParameters>]
 ```
 
@@ -26,7 +26,7 @@ Many console applications simply write to stderr as a way of separating output f
 ### EXAMPLE 1
 
 ```powershell
-    PS C:\> Invoke-Executable "robocopy C:\src C:\dest" -AllowableExitCodes 0,1,2,3,7
+PS C:\> Invoke-Executable "robocopy C:\src C:\dest" -AllowableExitCodes 0,1,2,3,7
 ```
 
 Runs the executable robocopy.exe (presumably to copy C:\src to C:\dest) 
@@ -46,7 +46,7 @@ Aliases:
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -60,7 +60,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
 Default value: @(0)
 Accept pipeline input: False
 Accept wildcard characters: False

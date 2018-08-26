@@ -24,7 +24,7 @@ Describe 'Invoke-Executable' {
     # and allows setting the exit code with a 'exitcode:<number>' argument
     $cmd = "$PSScriptRoot\TestConsoleApp\bin\Release\netcoreapp2.0\win-x64\TestConsoleApp.exe"
 
-    It "returns stdout" {
+    It 'returns stdout' {
         $LASTEXITCODE = $null
         $output = Invoke-Executable $cmd
         $output | Should -Contain 'Hello from stdout!'
@@ -83,5 +83,9 @@ Describe 'Invoke-Executable' {
 
     It 'allows double digit exit code' {
         Invoke-Executable "$cmd exitcode:10" -AllowableExitCodes 10
+    }
+
+    It 'accepts command from input' {
+        "$cmd" | Invoke-Executable
     }
 }
