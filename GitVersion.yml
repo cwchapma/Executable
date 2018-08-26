@@ -1,4 +1,7 @@
 mode: ContinuousDeployment
+major-version-bump-message: '(breaking|major):'
+minor-version-bump-message: '(feat(ure)?|minor):'
+patch-version-bump-message: '(fix|patch):'
 branches: {}
 ignore:
   sha: []
