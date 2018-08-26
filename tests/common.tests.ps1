@@ -1,15 +1,9 @@
 $ProjectPath = Split-Path $PSScriptRoot
 
-if ($env:APPVEYOR)
-{
-    $ModuleName = $env:Appveyor_Project_Name
-    $Version = $env:APPVEYOR_BUILD_VERSION
-}
-else
-{
-    $ModuleName = Split-Path $ProjectPath -Leaf
-    $Version = "0.2.0"
-}
+$gitversion = GitVersion.exe | ConvertFrom-Json
+
+$Version = $gitversion.MajorMinorPatch
+$ModuleName = Split-Path $ProjectPath -Leaf
 
 $ModulePath = Join-Path $ProjectPath $ModuleName
 $ManifestPath = Join-Path $ModulePath "$ModuleName.psd1"

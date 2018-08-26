@@ -6,9 +6,8 @@ skip_commits:
 os: Visual Studio 2017
 
 install:
-  - ps: Install-PackageProvider -Name NuGet -Confirm:$false -Force -ErrorAction Stop | Out-Null
-  - ps: Install-Module -Name Pester, PSScriptAnalyzer, PlatyPS -Confirm:$false -Force -ErrorAction Continue -SkipPublisherCheck | Out-Null
-
+  - ps: . ./build/prerequisites.ps1
+  
 build: false
 
 build_script:
