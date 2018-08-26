@@ -23,6 +23,7 @@
 function Invoke-Executable {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory)]
         [String] $Command,
         [int[]] $AllowableExitCodes = @(0),
         [Switch] $StdErrAsErrorRecords = $false
