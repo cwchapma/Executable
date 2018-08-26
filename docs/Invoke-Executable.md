@@ -8,25 +8,27 @@ schema: 2.0.0
 # Invoke-Executable
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Executes a executable file (*.exe) and handles stderr and exit codes
 
 ## SYNTAX
 
 ```
-Invoke-Executable [[-Command] <String>] [-StdErrAsErrorRecords] [<CommonParameters>]
+Invoke-Executable [[-Command] <String>] [[-AllowableExitCodes] <Int32[]>] [-StdErrAsErrorRecords]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+By default when powershell runs an executable any output to stderr is converted to an ErrorRecord.
+Many console applications simply write to stderr as a way of separating output from stdout - not because there was an error.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+<example usage>
 ```
 
-{{ Add example description here }}
+Explanation of what the example does
 
 ## PARAMETERS
 
@@ -39,8 +41,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AllowableExitCodes
+{{Fill AllowableExitCodes Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: @(0)
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -55,7 +72,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -66,11 +83,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### None
-
+### Inputs (if any)
 ## OUTPUTS
 
-### System.Object
+### Output (if any)
 ## NOTES
+General notes
 
 ## RELATED LINKS

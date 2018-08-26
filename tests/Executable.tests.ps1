@@ -12,12 +12,20 @@ else
 $ModulePath = Join-Path $ProjectPath $ModuleName
 Import-Module $ModulePath -Force
 
-dotnet build --configuration Release --runtime win-x64 $PSScriptRoot\TestConsoleApp
+Describe 'TestConsoleApp' {
+    It 'builds' {
+        dotnet build --configuration Release --runtime win-x64 $PSScriptRoot\TestConsoleApp
+        $LASTEXITCODE | Should -Be 0
+    }
+}
 
 Describe 'Invoke-Executable' {
+    # TestConsoleApp is an console app that writes to stdout, stderr
+    # and allows setting the exit code with a 'exitcode:<number>' argument
     $cmd = "$PSScriptRoot\TestConsoleApp\bin\Release\netcoreapp2.0\win-x64\TestConsoleApp.exe"
 
     It "returns stdout" {
+        $LASTEXITCODE = $null
         $output = Invoke-Executable $cmd
         $output | Should -Contain 'Hello from stdout!'
     }
@@ -55,5 +63,25 @@ Describe 'Invoke-Executable' {
     It 'handles \n in a path arg' {
         $output = Invoke-Executable "$cmd 'c:\this is a\nother test'"
         $output[2] | Should -Be "Arg: c:\this is a\nother test"
+    }
+
+    It 'throws exception when exitcode is 1' {
+        { Invoke-Executable "$cmd exitcode:1" } | Should -Throw
+    }
+
+    It 'throws exception when exitcode is -1' {
+        { Invoke-Executable "$cmd exitcode:-1" } | Should -Throw
+    }
+
+    It 'does not throw if exitcode is -1 but allowable' {
+        Invoke-Executable "$cmd exitcode:-1" -AllowableExitCodes 0,-1
+    }
+
+    It 'throws exception when exitcode is 0 but not allowable' {
+        { Invoke-Executable "$cmd exitcode:-1" -AllowableExitCodes 1 } | Should -Throw
+    }
+
+    It 'allows double digit exit code' {
+        Invoke-Executable "$cmd exitcode:10" -AllowableExitCodes 10
     }
 }

@@ -29,4 +29,3 @@ $null = New-ExternalHelp -Path $DocsPath -OutPutPath $DocsOutPutPath -Encoding (
 
 # run tests
 Invoke-Pester -EnableExit:$TestExit -PesterOption @{IncludeVSCodeMarker = $true}
-
