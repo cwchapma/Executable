@@ -4,6 +4,13 @@
 .DESCRIPTION
     By default when powershell runs an executable any output to stderr is converted to an ErrorRecord.
     Many console applications simply write to stderr as a way of separating output from stdout - not because there was an error.
+.PARAMETER Command
+    The executable command and it's arguments
+.PARAMETER AllowableExitCodes
+    An array of the allowable exit codes. If the exit code after running the command is not in this list, an exception is thrown.
+.PARAMETER StdErrAsErrorRecords
+    Indicates lines output to stderr by the command, should be returned as ErrorRecords. 
+    By default, this cmdlet converts lines output to stderr to strings that appear as stdout.
 .EXAMPLE
     PS C:\> Invoke-Executable "robocopy C:\src C:\dest" -AllowableExitCodes 0,1,2,3,7
     Runs the executable robocopy.exe (presumably to copy C:\src to C:\dest) 
