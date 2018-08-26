@@ -1,3 +1,5 @@
+#Requires -Modules @{ ModuleName = "PowerShellGet"; ModuleVersion = "1.6.6" }
+
 $ProjectPath = Split-Path $PSScriptRoot
 $ModuleName = Split-Path $ProjectPath -Leaf
 
