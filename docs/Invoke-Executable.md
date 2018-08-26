@@ -24,23 +24,26 @@ Many console applications simply write to stderr as a way of separating output f
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
-<example usage>
+
+```powershell
+    PS C:\> Invoke-Executable "robocopy C:\src C:\dest" -AllowableExitCodes 0,1,2,3,7
 ```
 
-Explanation of what the example does
+Runs the executable robocopy.exe (presumably to copy C:\src to C:\dest) 
+and will not throw an exception if the exit code is one of 0,1,2,3, or 7
 
 ## PARAMETERS
 
 ### -Command
-{{Fill Command Description}}
+
+The executable and arguments
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -48,7 +51,8 @@ Accept wildcard characters: False
 ```
 
 ### -AllowableExitCodes
-{{Fill AllowableExitCodes Description}}
+
+A list of exit codes that will not cause an exception to be thrown.  By default, only an exit code of 0 is allowed.
 
 ```yaml
 Type: Int32[]
@@ -63,7 +67,8 @@ Accept wildcard characters: False
 ```
 
 ### -StdErrAsErrorRecords
-{{Fill StdErrAsErrorRecords Description}}
+
+Causes lines written to stderr to be added to the output as ErrorRecords
 
 ```yaml
 Type: SwitchParameter
