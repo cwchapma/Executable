@@ -107,4 +107,9 @@ Describe 'Invoke-Executable' {
         $output[1].TargetObject | Should -Be "Hello from stderr!"
         $MyErrors[0].TargetObject | Should -Contain "Hello from stderr!"
     }
+
+    It 'supports exec alias' {
+        $output = exec $cmd
+        $output | Should -Contain 'Hello from stdout!'
+    }
 }

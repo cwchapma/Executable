@@ -9,7 +9,9 @@
 	FunctionsToExport = @(
 		"Invoke-Executable"
 	)
-
+	AliasesToExport = @(
+		"exec"
+	)
 	PrivateData = @{
         PSData = @{
             Tags = @('executable','exe','commandline')

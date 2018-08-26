@@ -49,3 +49,5 @@ function Invoke-Executable {
         }
     }
 }
+
+Set-Alias -Name exec -Value Invoke-Executable
