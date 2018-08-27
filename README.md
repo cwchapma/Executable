@@ -4,6 +4,8 @@ Easily execute executables (*.exe), check the exit code, and handle output to st
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dktthvk43gwicc7l?svg=true)](https://ci.appveyor.com/project/cwchapma/Executable)
 
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/cwchapma/Executable.svg)](https://ci.appveyor.com/project/cwchapma/executable/build/tests)
+
 [![latest version](https://img.shields.io/powershellgallery/v/Executable.svg?label=latest+version)](https://www.powershellgallery.com/packages/Executable)
 
 ## Features
