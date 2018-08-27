@@ -37,7 +37,7 @@ $null = New-ExternalHelp -Path $DocsPath -OutPutPath $DocsOutPutPath -Encoding (
 
 # run tests
 $testResultsFile = ".\TestsResults.xml"
-Invoke-Pester `
+$res = Invoke-Pester `
     -PesterOption @{IncludeVSCodeMarker = $true} `
     -OutputFormat NUnitXml `
     -OutputFile $testResultsFile
