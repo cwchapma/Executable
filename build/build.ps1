@@ -40,7 +40,8 @@ $testResultsFile = ".\TestsResults.xml"
 $res = Invoke-Pester `
     -PesterOption @{IncludeVSCodeMarker = $true} `
     -OutputFormat NUnitXml `
-    -OutputFile $testResultsFile
+    -OutputFile $testResultsFile `
+    -PassThru
 
 if ($env:APPVEYOR) {
     (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $testResultsFile))
