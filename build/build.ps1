@@ -49,3 +49,5 @@ if ($env:APPVEYOR) {
         throw "$($res.FailedCount) tests failed."
     }
 }
+
+Remove-Item $testResultsFile
