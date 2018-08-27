@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace test
 {
@@ -16,6 +17,9 @@ namespace test
             Console.Error.WriteLine("Hello from stderr!");
             // Flush to make sure stderr and stdout are syncronized (output in the order in the code)
             Console.Error.Flush();
+
+            // Hack to get stderr to output in proper order
+            Thread.Sleep(10);
 
             // Output args so we can test they are passed properly
             foreach (var arg in args) {
