@@ -109,9 +109,6 @@ PrivateData = @{
         # ReleaseNotes of this module
         ReleaseNotes = 'Add support for specifying allowable exit codes'
 
-        # Prerelease string of this module
-        Prerelease = 'ci0029'
-
         # Flag to indicate whether the module requires explicit user acceptance for install/update
         # RequireLicenseAcceptance = $false
 
@@ -129,4 +126,3 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
-
