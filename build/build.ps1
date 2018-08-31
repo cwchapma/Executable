@@ -19,14 +19,16 @@ $params = @{
 }
 if ($gitversion.PreReleaseTag) {
     $PrereleaseVersion = "-$($gitversion.PreReleaseLabel)$($gitversion.CommitsSinceVersionSourcePadded)"
-    "Version: $Version$PrereleaseVersion"
+    $FullVersion = "$Version$PrereleaseVersion"
     $params += @{
         Prerelease = $PrereleaseVersion
     }
 } else {
-    "Version: $Version"
+    $FullVersion = $Version
 }
 
+"Version: $FullVersion"
+Update-AppveyorBuild -Version $FullVersion
 Update-ModuleManifest @params
 
 # build help file
