@@ -28,7 +28,9 @@ if ($gitversion.PreReleaseTag) {
 }
 
 "Version: $FullVersion"
-Update-AppveyorBuild -Version $FullVersion
+if ($env:APPVEYOR) {
+    Update-AppveyorBuild -Version $FullVersion
+}
 Update-ModuleManifest @params
 
 # build help file
