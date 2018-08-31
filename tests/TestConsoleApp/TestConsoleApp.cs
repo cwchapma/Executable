@@ -19,7 +19,7 @@ namespace test
             Console.Error.Flush();
 
             // Hack to get stderr to output in proper order
-            Thread.Sleep(10);
+            Thread.Sleep(100);
 
             // Output args so we can test they are passed properly
             foreach (var arg in args) {
