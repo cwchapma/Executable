@@ -40,7 +40,19 @@ Import-Module Executable
 
 ## Usage
 
-See [Invoke-Executable](docs/Invoke-Executable.md)
+Example:
+
+```powershell
+Invoke-Executable "git pull"
+```
+
+or with the `exec` alias:
+
+```powershell
+exec "robocopy C:\source C:\destination" --AllowableExitCodes 0,1,3
+```
+
+For more options: [Invoke-Executable](docs/Invoke-Executable.md)
 
 ## Contributions are welcome
 
