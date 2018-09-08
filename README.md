@@ -20,10 +20,22 @@ Many executables (*.exe) output to stderr, not as a way to indicate an error, bu
 
 ## Installation
 
-To install
+`Install-Module` requires the NuGet PackageProvider 2.8.5.201 or higher
+
+```powershell
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+```
+
+To install the module:
 
 ```powershell
 Install-Module Executable
+```
+
+Once the module is installed, you must also import it:
+
+```powershell
+Import-Module Executable
 ```
 
 ## Usage
